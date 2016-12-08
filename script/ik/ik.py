@@ -23,7 +23,7 @@ gui.applyConfiguration(boxname,target)
 gui.addSceneToWindow(scene,0)
 gui.refresh()
 
-import hpp.corbaserver.rbprm.tools.cwc_trajectory_helper as cwc_trajectory_helper
+
 import time
 
 #call to update target position

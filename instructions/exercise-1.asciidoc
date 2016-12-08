@@ -7,7 +7,7 @@ Program RRT algorithm in python.
 
 Instructions
 ------------
-Open a terminal cd into be-isae directory and open 3 tab by typing CTRL+SHIFT+T twice.
+Open a terminal cd into $DEVEL_DIR/src/hpp-practicals directory and open 3 tab by typing CTRL+SHIFT+T twice.
 In the first terminal, type
 [source,sh]
 ----

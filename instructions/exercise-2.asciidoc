@@ -8,7 +8,7 @@ Define a constraint graph and plan a manipulation path.
 
 Introduction
 ------------
-Open a terminal, cd into be-isae directory and open 3 tab by typing CTRL+SHIFT+T
+Open a terminal, cd into $DEVEL_DIR/src/hpp-practicals directory and open 3 tab by typing CTRL+SHIFT+T
 twice. In the first terminal, type
 [source,sh]
 ----
