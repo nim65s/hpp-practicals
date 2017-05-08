@@ -36,10 +36,12 @@ SET(URDF_UR_BENCHMARK_FILES
   )
 
 SET(URDF_UR_FILES
+  urdf/ur5_gripper.urdf
   urdf/ur5_joint_limited_robot.urdf
 )
 
 SET(SRDF_UR_FILES
+  srdf/ur5_gripper.srdf
   srdf/ur5_joint_limited_robot.srdf
 )
 
@@ -80,6 +82,11 @@ INSTALL(FILES
 INSTALL(FILES
   ${PROJECT_SOURCE_DIR}/src/hpp/corbaserver/practicals/__init__.py
   DESTINATION ${PYTHON_SITELIB}/hpp/corbaserver/practicals
+)
+
+INSTALL(FILES
+  ${PROJECT_SOURCE_DIR}/src/hpp/corbaserver/practicals/manipulation/__init__.py
+  DESTINATION ${PYTHON_SITELIB}/hpp/corbaserver/practicals/manipulation
 )
 
 INSTALL(FILES
