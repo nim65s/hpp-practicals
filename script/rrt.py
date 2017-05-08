@@ -7,9 +7,9 @@ ps = ProblemSolver (robot)
 
 vf = ViewerFactory (ps)
 
-vf.loadObstacleModel ("hpp_environments","ur_benchmark/obstacles","obstacles")
-vf.loadObstacleModel ("hpp_environments","ur_benchmark/table","table")
-vf.loadObstacleModel ("hpp_environments","ur_benchmark/wall","wall")
+vf.loadObstacleModel ("hpp_practicals","ur_benchmark/obstacles","obstacles")
+vf.loadObstacleModel ("hpp_practicals","ur_benchmark/table","table")
+vf.loadObstacleModel ("hpp_practicals","ur_benchmark/wall","wall")
 
 r = vf.createViewer ()
 
