@@ -1,4 +1,4 @@
-from hpp.corbaserver.ur5 import Robot
+from hpp.corbaserver.practicals.ur5 import Robot
 from hpp.corbaserver import ProblemSolver
 from hpp.gepetto import ViewerFactory, PathPlayer
 

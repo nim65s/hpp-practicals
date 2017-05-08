@@ -1,4 +1,4 @@
-from hpp.corbaserver.manipulation.ur5 import Robot
+from hpp.corbaserver.manipulation.practicals.ur5 import Robot
 from hpp.corbaserver.manipulation import ProblemSolver
 from hpp.gepetto.manipulation import ViewerFactory
 from hpp.gepetto import PathPlayer
