@@ -66,6 +66,9 @@ INSTALL(FILES ${URDF_UR_FILES}
 INSTALL(FILES ${SRDF_UR_FILES}
   DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/srdf)
 
+INSTALL(DIRECTORY meshes
+  DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME})
+
 # Install python client files
 #
 INSTALL(FILES
@@ -84,7 +87,5 @@ INSTALL(FILES
   ${PROJECT_SOURCE_DIR}/src/hpp/corbaserver/practicals/manipulation/ur5/__init__.py
   DESTINATION ${PYTHON_SITELIB}/hpp/corbaserver/practicals/manipulation/ur5
 )
-
-
 
 SETUP_PROJECT_FINALIZE()
