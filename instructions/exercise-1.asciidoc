@@ -62,9 +62,9 @@ You should see the above window displaying a manipulator robot surrounded by obs
 Then, typing in the python terminal
 [source,python]
 ----
->>> v (q)
+>>> v (q1)
 ----
-You shoud see the robot in configuration +q+.
+You shoud see the robot in configuration +q1+.
 
 Displaying a path
 ~~~~~~~~~~~~~~~~~
