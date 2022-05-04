@@ -18,18 +18,19 @@
 
 from hpp.corbaserver.robot import Robot as Parent
 
-class Robot (Parent):
+
+class Robot(Parent):
     packageName = "hpp_practicals"
     urdfName = "ur5_joint_limited_robot"
     urdfSuffix = ""
     srdfSuffix = ""
 
-    def __init__ (self, robotName, load = True):
-        Parent.__init__ (self, robotName, "anchor", load)
+    def __init__(self, robotName, load=True):
+        Parent.__init__(self, robotName, "anchor", load)
         self.rightWrist = "wrist_3_joint"
-        self.leftWrist  = "wrist_3_joint"
+        self.leftWrist = "wrist_3_joint"
         self.endEffector = "ee_fixed_joint"
 
-    def getInitialConfig (self):
-        q = 6*[0]
+    def getInitialConfig(self):
+        q = 6 * [0]
         return q
