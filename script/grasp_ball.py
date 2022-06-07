@@ -12,8 +12,6 @@ from manipulation import (
 )
 from manipulation import PathPlayer  # noqa: F401
 
-Client().problem.resetProblem()
-
 vf.loadEnvironmentModel(Ground, "ground")
 vf.loadObjectModel(Pokeball, "pokeball")
 robot.setJointBounds(
