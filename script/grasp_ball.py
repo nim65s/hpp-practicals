@@ -1,6 +1,5 @@
 from hpp import Transform
 from hpp.corbaserver.manipulation import ConstraintGraph, Constraints
-from hpp.corbaserver import Client
 from manipulation import (
     robot,
     vf,
