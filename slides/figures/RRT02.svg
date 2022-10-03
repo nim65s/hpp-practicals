@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Creator: fig2dev Version 3.2.7a -->
+
+<!-- CreationDate: 2022-09-16 11:40:01 -->
+
+<!-- Magnification: 1.05 -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="426pt"
+   height="261pt"
+   viewBox="764 -1 6752 4142"
+   version="1.1"
+   id="svg22"
+   sodipodi:docname="RRT02.svg"
+   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)">
+  <metadata
+     id="metadata28">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs26" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1016"
+     id="namedview24"
+     showgrid="false"
+     inkscape:zoom="1.7279299"
+     inkscape:cx="210.92219"
+     inkscape:cy="112.69409"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg22" />
+  <circle
+     style="fill:#000000;stroke:#000000;stroke-width:8px"
+     id="circle2"
+     r="59"
+     cy="1097"
+     cx="1487" />
+  <circle
+     style="fill:#000000;stroke:#000000;stroke-width:8px"
+     id="circle4"
+     r="59"
+     cy="2049.8652"
+     cx="6752.3037" />
+  <polygon
+     style="fill:#7f7f7f;stroke:#000000;stroke-width:8px"
+     id="polygon6"
+     points="3883,2184 3706,1328 2822,1387 2320,1741 "
+     transform="rotate(-34.264355,2873.7081,2216.206)" />
+  <polygon
+     style="fill:#7f7f7f;stroke:#000000;stroke-width:8px"
+     id="polygon8"
+     points="4815,3690 5729,3542 5640,2510 4313,2451 "
+     transform="matrix(0.9991535,0,0,2.0797169,38.690441,-4239.9116)" />
+  <polygon
+     style="fill:#7f7f7f;stroke:#000000;stroke-width:8px"
+     id="polygon10"
+     points="3197,2965 2223,3525 2076,2464 2518,2346 " />
+  <text
+     style="font-style:normal;font-weight:normal;font-size:216px;font-family:Times;text-anchor:start;fill:#000000"
+     id="text12"
+     font-size="216"
+     font-weight="normal"
+     font-style="normal"
+     y="861"
+     x="1353"
+     xml:space="preserve">q</text>
+  <text
+     style="font-style:normal;font-weight:normal;font-size:144px;font-family:Times;text-anchor:start;fill:#000000"
+     id="text14"
+     font-size="144"
+     font-weight="normal"
+     font-style="normal"
+     y="937"
+     x="1492"
+     xml:space="preserve">init</text>
+  <text
+     style="font-style:normal;font-weight:normal;font-size:216px;font-family:Times;text-anchor:start;fill:#000000"
+     id="text16"
+     font-size="216"
+     font-weight="normal"
+     font-style="normal"
+     y="1755.8652"
+     x="6634.3037"
+     xml:space="preserve">q</text>
+  <text
+     style="font-style:normal;font-weight:normal;font-size:144px;font-family:Times;text-anchor:start;fill:#000000"
+     id="text18"
+     font-size="144"
+     font-weight="normal"
+     font-style="normal"
+     y="1825.8652"
+     x="6780.3037"
+     xml:space="preserve">goal</text>
+  <circle
+     style="fill:#000000;stroke:#000000;stroke-width:8px"
+     id="circle2-6"
+     r="59"
+     cy="2508.5005"
+     cx="3728.5542" />
+  <path
+     style="fill:none;stroke:#000000;stroke-width:11.90229893px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="m 1483.0064,1103.311 c 2245.548,1398.3013 2245.548,1398.3013 2245.548,1398.3013"
+     id="path880"
+     inkscape:connector-curvature="0" />
+  <path
+     style="fill:none;stroke:#000000;stroke-width:11.90229893px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="M 6752.467,2043.5481 C 3728.5545,2501.6124 3728.5545,2501.6124 3728.5545,2501.6124"
+     id="path882"
+     inkscape:connector-curvature="0" />
+  <text
+     style="font-style:normal;font-weight:normal;font-size:216px;font-family:Times;text-anchor:start;fill:#000000;stroke-width:1"
+     id="text16-1"
+     font-size="216"
+     font-weight="normal"
+     font-style="normal"
+     y="2817.4526"
+     x="3546.499"
+     xml:space="preserve">q</text>
+  <text
+     style="font-style:normal;font-weight:normal;font-size:144.00036292px;font-family:Times;text-anchor:start;fill:#000000;stroke-width:1;-inkscape-font-specification:'Times, Normal';font-stretch:normal;font-variant:normal;text-align:start;writing-mode:lr;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;"
+     id="text18-7"
+     font-size="144"
+     font-weight="normal"
+     font-style="normal"
+     y="2887.4526"
+     x="3692.499"
+     xml:space="preserve"><tspan
+       sodipodi:role="line"
+       id="tspan902">rand</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:253.91570877px;line-height:1.25;font-family:Times, serif;-inkscape-font-specification:'Times, serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:11.90229893;"
+     x="1427.901"
+     y="297.3934"
+     id="text21"><tspan
+       sodipodi:role="line"
+       id="tspan33">Try to connect it to the nearest nodes of each connected</tspan><tspan
+       sodipodi:role="line"
+       id="tspan35">component</tspan></text>
+</svg>
