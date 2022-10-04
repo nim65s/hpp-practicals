@@ -728,17 +728,13 @@ install: function(toclevels) {
 }
 
 }
-asciidoc.install(2);
+asciidoc.install();
 /*]]>*/
 </script>
 </head>
 <body class="article">
 <div id="header">
 <h1>Manipulation planning</h1>
-<div id="toc">
-  <div id="toctitle">Table of Contents</div>
-  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
-</div>
 </div>
 <div id="content">
 <div class="sect1">
@@ -885,7 +881,7 @@ a state where the gripper holds the ball above the ground.
 <div class="admonitionblock">
 <table><tr>
 <td class="icon">
-<img src="./images/icons/warning.png" alt="Warning" />
+<div class="title">Warning</div>
 </td>
 <td class="content">In method <code>graph.createNode</code> the order of the nodes in the list given as input is important: when checking in which node a configuration lies, node constraints will be checked in the order of node creation.</td>
 </tr></table>
@@ -923,11 +919,11 @@ http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
 <pre><tt><span style="font-weight: bold"><span style="color: #0000FF">for</span></span> i <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> <span style="font-weight: bold"><span style="color: #000000">range</span></span><span style="color: #990000">(</span><span style="color: #993399">100</span><span style="color: #990000">):</span>
   q <span style="color: #990000">=</span> robot<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">shootRandomConfig</span></span><span style="color: #990000">()</span>
-  res<span style="color: #990000">,</span> q3<span style="color: #990000">,</span> err <span style="color: #990000">=</span> graph<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">generateTargetConfig</span></span> <span style="color: #990000">(</span>edgeName<span style="color: #990000">,</span> q1<span style="color: #990000">,</span> q2<span style="color: #990000">)</span>
+  res<span style="color: #990000">,</span> q2<span style="color: #990000">,</span> err <span style="color: #990000">=</span> graph<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">generateTargetConfig</span></span> <span style="color: #990000">(</span>edgeName<span style="color: #990000">,</span> q1<span style="color: #990000">,</span> q<span style="color: #990000">)</span>
   <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> res<span style="color: #990000">:</span> <span style="font-weight: bold"><span style="color: #0000FF">break</span></span></tt></pre></div></div>
 <div class="paragraph"><p>where <code>q1</code> is a configuration in the starting node of <code>edgeName</code>.
 If <code>i==99 and res == False</code>, the constraint is probably malformed. Otherwise,
-configuration <code>q3</code> is in the destination node of <code>edgeName</code> and accessible from
+configuration <code>q2</code> is in the destination node of <code>edgeName</code> and accessible from
 q1 following this edge.</p></div>
 <div class="sect2">
 <h3 id="_some_useful_methods">Some useful methods</h3>
@@ -1014,7 +1010,7 @@ graph<span style="color: #990000">.</span><span style="font-weight: bold"><span 
 <div id="footer">
 <div id="footer-text">
 Last updated
- 2021-10-01 15:31:46 CEST
+ 2022-10-04 16:08:08 CEST
 </div>
 </div>
 </body>

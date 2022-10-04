@@ -145,12 +145,12 @@ To test an edge name `edgeName`, you can use the following loop:
 ----
 for i in range(100):
   q = robot.shootRandomConfig()
-  res, q3, err = graph.generateTargetConfig (edgeName, q1, q2)
+  res, q2, err = graph.generateTargetConfig (edgeName, q1, q)
   if res: break
 ----
 where `q1` is a configuration in the starting node of `edgeName`.
 If `i==99 and res == False`, the constraint is probably malformed. Otherwise,
-configuration `q3` is in the destination node of `edgeName` and accessible from
+configuration `q2` is in the destination node of `edgeName` and accessible from
 q1 following this edge.
 
 Some useful methods
