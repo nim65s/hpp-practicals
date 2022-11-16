@@ -10,8 +10,6 @@ from manipulation import (
 )
 from manipulation import PathPlayer  # noqa: F401
 
-Client().problem.resetProblem()
-
 vf.loadEnvironmentModel(Ground, "ground")
 vf.loadEnvironmentModel(Box, "box")
 vf.moveObstacle("box/base_link_0", [0.3 + 0.04, 0, 0.04, 0, 0, 0, 1])
