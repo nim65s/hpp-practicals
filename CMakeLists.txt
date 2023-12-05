@@ -26,6 +26,11 @@ project(${PROJECT_NAME} ${PROJECT_ARGS})
 
 findpython()
 
+find_package(hpp-manipulation-corba REQUIRED)
+find_package(hpp-gepetto-viewer REQUIRED)
+find_package(hpp-plot REQUIRED)
+find_package(hpp-gui REQUIRED)
+
 set(URDF_UR_BENCHMARK_FILES
     urdf/ur_benchmark/obstacles.urdf
     urdf/ur_benchmark/table.urdf
