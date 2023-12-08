@@ -11,7 +11,7 @@
 # details.  You should have received a copy of the GNU Lesser General Public
 # License along with this file.  If not, see <http://www.gnu.org/licenses/>.
 
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 3.10)
 
 set(PROJECT_NAME hpp_practicals)
 set(PROJECT_DESCRIPTION "Practicals for Humanoid Path Planner software.")
