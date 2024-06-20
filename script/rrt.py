@@ -1,6 +1,6 @@
 from hpp.corbaserver import Client, ProblemSolver
 from hpp.gepetto import PathPlayer, ViewerFactory  # noqa: F401
-from hpp.practicals.ur5 import Robot
+from hpp_practicals.ur5 import Robot
 from motion_planner import MotionPlanner
 
 Client().problem.resetProblem()
