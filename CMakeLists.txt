@@ -55,12 +55,21 @@ include("${JRL_CMAKE_MODULES}/python.cmake")
 compute_project_args(PROJECT_ARGS LANGUAGES CXX)
 project(${PROJECT_NAME} ${PROJECT_ARGS})
 
+option(USE_TIAGO "Whether to trigger dependencies to the Tiago model" OFF)
+
 findpython()
 
 find_package(hpp-manipulation-corba REQUIRED)
 find_package(hpp-gepetto-viewer REQUIRED)
 find_package(hpp-plot REQUIRED)
 find_package(hpp-gui REQUIRED)
+if (USE_TIAGO)
+  find_package(tiago_description REQUIRED)
+  find_package(tiago_data REQUIRED)
+  find_package(pmb2_description REQUIRED)
+  find_package(hey5_description REQUIRED)
+  add_required_dependency(gerard_bauzil)
+endif()
 
 set(URDF_UR_BENCHMARK_FILES
     urdf/ur_benchmark/obstacles.urdf
@@ -78,6 +87,11 @@ set(SRDF_UR_FILES srdf/ur5_gripper.srdf srdf/ur5_joint_limited_robot.srdf)
 set(SRDF_UR_BENCHMARK_FILES
     srdf/ur_benchmark/box.srdf srdf/ur_benchmark/ground.srdf
     srdf/ur_benchmark/pokeball.srdf)
+
+set(URDF_PART_FILES urdf/part.urdf)
+
+set(SRDF_PART_FILES srdf/part.srdf)
+
 
 # Install environment and robot model files
 #
@@ -100,6 +114,14 @@ install(FILES ${SRDF_UR_FILES}
 
 install(DIRECTORY meshes
         DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME})
+
+ if (USE_TIAGO)
+  install(FILES ${URDF_PART_FILES}
+          DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/urdf)
+
+  install(FILES ${SRDF_PART_FILES}
+          DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/srdf)
+endif()
 
 # Install python client files
 #
