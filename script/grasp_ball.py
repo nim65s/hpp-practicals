@@ -1,5 +1,5 @@
 from hpp import Transform
-from hpp.manipulation import ConstraintGraph, Constraints
+from hpp_manipulation import ConstraintGraph, Constraints
 from manipulation import (
     Ground,
     PathPlayer,  # noqa: F401

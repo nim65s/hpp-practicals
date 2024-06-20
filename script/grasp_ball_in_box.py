@@ -1,5 +1,5 @@
 from hpp.corbaserver import Client  # noqa: F401
-from hpp.manipulation import ConstraintGraph
+from hpp_manipulation import ConstraintGraph
 from manipulation import (
     Box,
     Ground,

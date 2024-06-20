@@ -16,7 +16,7 @@
 # hpp-universal-robot.  If not, see
 # <http://www.gnu.org/licenses/>.
 
-from hpp.manipulation.robot import Robot as Parent
+from hpp_manipulation.robot import Robot as Parent
 
 
 class Robot(Parent):

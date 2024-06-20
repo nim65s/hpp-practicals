@@ -1,7 +1,7 @@
 from hpp.corbaserver import loadServerPlugin
 from hpp.gepetto import PathPlayer  # noqa: F401
 from hpp.gepetto.manipulation import ViewerFactory
-from hpp.manipulation import Client, ProblemSolver
+from hpp_manipulation import Client, ProblemSolver
 from hpp_practicals.manipulation.ur5 import Robot
 
 loadServerPlugin("corbaserver", "manipulation-corba.so")
