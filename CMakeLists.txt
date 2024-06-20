@@ -104,23 +104,23 @@ install(DIRECTORY meshes
 # Install python client files
 #
 install(
-  FILES ${PROJECT_SOURCE_DIR}/src/hpp/practicals/ur5/robot.py
-        ${PROJECT_SOURCE_DIR}/src/hpp/practicals/ur5/__init__.py
-  DESTINATION ${PYTHON_SITELIB}/hpp/practicals/ur5)
+  FILES ${PROJECT_SOURCE_DIR}/src/hpp_practicals/ur5/robot.py
+        ${PROJECT_SOURCE_DIR}/src/hpp_practicals/ur5/__init__.py
+  DESTINATION ${PYTHON_SITELIB}/hpp_practicals/ur5)
 
-install(FILES ${PROJECT_SOURCE_DIR}/src/hpp/practicals/__init__.py
-        DESTINATION ${PYTHON_SITELIB}/hpp/practicals)
-
-install(
-  FILES
-    ${PROJECT_SOURCE_DIR}/src/hpp/practicals/manipulation/__init__.py
-  DESTINATION ${PYTHON_SITELIB}/hpp/practicals/manipulation)
+install(FILES ${PROJECT_SOURCE_DIR}/src/hpp_practicals/__init__.py
+        DESTINATION ${PYTHON_SITELIB}/hpp_practicals)
 
 install(
   FILES
-    ${PROJECT_SOURCE_DIR}/src/hpp/practicals/manipulation/ur5/robot.py
-    ${PROJECT_SOURCE_DIR}/src/hpp/practicals/manipulation/ur5/__init__.py
-  DESTINATION ${PYTHON_SITELIB}/hpp/practicals/manipulation/ur5)
+    ${PROJECT_SOURCE_DIR}/src/hpp_practicals/manipulation/__init__.py
+  DESTINATION ${PYTHON_SITELIB}/hpp_practicals/manipulation)
+
+install(
+  FILES
+    ${PROJECT_SOURCE_DIR}/src/hpp_practicals/manipulation/ur5/robot.py
+    ${PROJECT_SOURCE_DIR}/src/hpp_practicals/manipulation/ur5/__init__.py
+  DESTINATION ${PYTHON_SITELIB}/hpp_practicals/manipulation/ur5)
 
 add_library(${PROJECT_NAME} INTERFACE)
 install(
