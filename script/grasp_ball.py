@@ -1,5 +1,5 @@
 from hpp import Transform
-from hpp.corbaserver.manipulation import ConstraintGraph, Constraints
+from hpp.manipulation import ConstraintGraph, Constraints
 from manipulation import (
     Ground,
     PathPlayer,  # noqa: F401

@@ -1,8 +1,8 @@
 from hpp.corbaserver import loadServerPlugin
-from hpp.corbaserver.manipulation import Client, ProblemSolver
 from hpp.corbaserver.practicals.manipulation.ur5 import Robot
 from hpp.gepetto import PathPlayer  # noqa: F401
 from hpp.gepetto.manipulation import ViewerFactory
+from hpp.manipulation import Client, ProblemSolver
 
 loadServerPlugin("corbaserver", "manipulation-corba.so")
 Client().problem.resetProblem()
