@@ -3,22 +3,22 @@
   <link name="base_link">
     <visual>
       <geometry>
-        <box size="0.55 0.3 0.45"/>
+        <box size="0.5 0.4 0.4"/>
       </geometry>
-      <origin xyz="0 0 0.225"/>
+      <origin xyz="0 0 0.2"/>
       <material name="Red">
         <color rgba="1 0.1 0.1 0.6"/>
       </material>
     </visual>
     <collision>
       <geometry>
-        <box size="0.55 0.3 0.45"/>
+        <box size="0.5 0.4 0.4"/>
       </geometry>
-      <origin xyz="0 0 0.225"/>
+      <origin xyz="0 0 0.2"/>
     </collision>
     <visual>
       <geometry>
-        <box size="0.55 0.3 0.8"/>
+        <box size="0.5 0.4 0.8"/>
       </geometry>
       <origin xyz="0 0 -0.4"/>
       <material name="Grey">
@@ -27,7 +27,7 @@
     </visual>
     <collision>
       <geometry>
-        <box size="0.55 0.3 0.8"/>
+        <box size="0.5 0.4 0.8"/>
       </geometry>
       <origin xyz="0 0 -0.4"/>
     </collision>
