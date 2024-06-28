@@ -34,6 +34,7 @@ from CORBA import Any, TC_long, TC_float
 from hpp.corbaserver import wrap_delete
 from hpp.corbaserver.manipulation import createContext, ProblemSolver, ConstraintGraph, Rule, Constraints, loadServerPlugin
 from typing import List, Dict
+from csv import reader, writer
 
 configType = Dict[str, List[float]]
 configListType = List[configType]
@@ -155,7 +156,32 @@ class ArmPlanner:
                         p1.deleteThis(); p2.deleteThis(); p3.deleteThis(); p4.deleteThis()
                     p.deleteThis()
 
-
+    def saveRoadmap(self, filename):
+        """
+        Write configurations and edges in a file
+        """
+        # number of configurations
+        N = self.croadmap.getNbNodes()
+        nodes = list()
+        with open(filename, "w", newline='') as f:
+            w = writer(f)
+            f.write(f"Number of nodes: {N}\n")
+            # write configurations
+            for i in range(N):
+                q = self.croadmap.getNode(i)
+                nodes.append(q)
+                w.writerow(q)
+            N = self.croadmap.getNbEdges()
+            f.write(f"Number of edges: {N}\n")
+            for i in range(N):
+                p = self.croadmap.getEdge(i)
+                q1, d = self.croadmap.nearestNode(p.initial(), False)
+                assert(d < 1e-8)
+                q2, d = self.croadmap.nearestNode(p.end(), False)
+                assert(d < 1e-8)
+                i1 = nodes.index(q1); i2 = nodes.index(q2)
+                w.writerow([i1, i2])
+                p.deleteThis()
 
 class BasePlanner:
 
@@ -235,61 +261,71 @@ class BasePlanner:
                     p1.deleteThis(); p2.deleteThis(); p3.deleteThis(); p4.deleteThis()
                 p.deleteThis()
 
-def getMobileBaseRoadmap(basePlanner, roadmapFile):
+def readRoadmap(basePlanner, armPlanner, filename, part_handles, home_configs):
     """
-    \param basePlanner InStatePlanner instance
-    \param roadmapFile string of the location of the file with the roadmap
-    retrieves a roadmap from roadmapFile
+    Read a roadmap from a file.
+    This function requires an ArmPlanner and a BasePlanner to rebuild arm and base motions
     """
-    if path.exists(roadmapFile):
-        print("Reading mobile base roadmap", roadmapFile)
-        basePlanner.readRoadmap(roadmapFile)
-    else:
-        print("Building mobile base roadmap")
-        try:
-            basePlanner.cproblem.setParameter('kPRM*/numberOfNodes', Any(TC_long,300))
-            basePlanner.buildRoadmap(q0)
-            #sm.margins[:,:] = 0.
-            #basePlanner.cproblem.setSecurityMargins(sm.margins.tolist())
-        except HppError as e:
-            print(e)
-        print("Writing mobile base roadmap", roadmapFile)
-        basePlanner.writeRoadmap(roadmapFile)
+    with open(filename, "r") as f:
+        line = "#"
+        while line[0] == "#":
+            line = f.readline()
+        # read number of configurations
+        if line[:16] != "Number of nodes:":
+            raise RuntimeError(f"Expecting line starting with 'Number of nodes: ', got '{line}'")
+        N = int(line[16:])
+        nodes = list()
+        for i in range(N):
+            line = f.readline()
+            q = list(map(float, line.split(",")))
+            nodes.append(q)
+            armPlanner.croadmap.addNode(q)
+        line = f.readline()
+        if line[:16] != "Number of edges:":
+            raise RuntimeError(f"Expecting line starting with 'Number of edges: ', got '{line}'")
+        N = int(line[16:])
+        for i in range(N):
+            line = f.readline()
+            e = list(map(int, line.split(",")))
+            q1 = nodes[e[0]]
+            q2 = nodes[e[1]]
+            # Check whether the edge corresponds to a base motion or an arm motion
+            if q1[:7] == q2[:7]:
+                # arm motion
+                p, res, msg = armPlanner.planner.directPath(q1, q2, False)
+                p1 = p.asVector()
+                p2 = armPlanner.planner.timeParameterization(p1)
+            else:
+                # base motion
+                p, res, msg = basePlanner.planner.directPath(q1, q2, False)
+                p1 = p.asVector()
+                p2 = basePlanner.planner.timeParameterization(p1)
+            armPlanner.croadmap.addNodeAndEdge(q1, q2, p2)
+            p.deleteThis(); p1.deleteThis();  p2.deleteThis()
+        # retrieve dictionaries from roadmap
+        armPlanner.pregraspToGrasp = dict()
+        # Pregrasp configurations reaching a handle
+        armPlanner.handleToConfigs = dict()
+        for handle in part_handles:
+            armPlanner.handleToConfigs[handle] = list()
+        # Pregrasp configurations with same base pose as home configuration
+        armPlanner.homeToConfigs = dict()
+        for q_home in home_configs:
+            armPlanner.homeToConfigs[tuple(q_home)] = list()
+        for q1, q2 in zip(nodes, nodes[1:]):
+            for handle in part_handles:
+                state = f"driller/drill_tip > {handle} | 0-0_pregrasp"
+                res, err = armPlanner.graph.getConfigErrorForNode(state, q1)
+                if res:
+                    state = f"tiago/gripper grasps driller/handle : driller/drill_tip grasps {handle}"
+                    res, err = armPlanner.graph.getConfigErrorForNode(state, q2)
+                    assert(res)
+                    armPlanner.pregraspToGrasp[tuple(q1)] = q2
+                    armPlanner.handleToConfigs[handle].append(q1)
+                    for q_home in home_configs:
+                        if q_home[:7] == q1[:7]:
+                            armPlanner.homeToConfigs[tuple(q_home)].append(q1)
+                            break
+                    break
 
-### CONFIGURATION GENERATION
-
-# \goal get a collision-free pregrasp configuration for the given handle
-# \param handle name of the handle: should be "part/handle_i" or "part/virtual_i" where i is an
-#        integer,
-# \param restConfig rest configuration of the robot
-# \rval q configuration pregrasping handle
-def shootPregraspConfig(handle: str, restConfig: List[float]) -> configType:
-    res = False
-    tries = 0
-    while (not res) and (tries<20):
-        try: # get a config
-            tries+=1
-            if tries%10==0:
-                print("attempt ", tries)
-            q = robot.shootRandomConfig()
-            res, q, err = graph.generateTargetConfig("driller/drill_tip pregrasps "+handle, restConfig, q)
-            if (res) and (robot.isConfigValid(q)[0] is False): # check it is collision-free
-                # print("config not valid")
-                res = False
-        except Exception as exc:
-            print(exc)
-            res = False
-            pass
-    # if res and tries<=100:
-    #     print("config generation successfull")
-    return {"name": handle+"_pregrasp", "config": q}
-
-# \goal get multiple collision-free pregrasp configurations for the given handle
-# \param handle name of the handle: should be "part/handle_i" or "part/virtual_i" where i is an
-#        integer,
-# \param restConfig rest configuration of the robot
-# \param nbConfigs nb of configurations to be generated
-# \param configList list where the generated configurations are to be stored
-def shootPregraspConfigs(handle: str, restConfig: List[float], nbConfigs: int, configList: configListType) -> None:
-    for i in range(nbConfigs):
-        configList.append(shootPregraspConfig(handle, restConfig))
+                
