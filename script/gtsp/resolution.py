@@ -107,10 +107,16 @@ class ArmPlanner:
             print("generating pre-grasp and grasp configurations for home configuration:")
             print(q_home)
             pg_configs = list()
+            q_guesses = [q_home] + [self.robot.shootRandomConfig() for i in range(20)]
             for handle in part_handles:
                 edge = f"driller/drill_tip > {handle} | 0-0_01"
-                # generate pregrasp config
-                res, qpg, err = self.graph.generateTargetConfig(edge, q_home, q_home)
+                # generate pregrasp config using q_home and previously computed pre-grasp
+                # configurations as initial guess
+                for q in q_guesses:
+                    res, qpg, err = self.graph.generateTargetConfig(edge, q_home, q)
+                    if res:
+                        q_guesses.insert(0, qpg)
+                        break
                 if not res: continue
                 # test collision
                 res, msg = self.planner.validateConfiguration(qpg, self.graph.edges[edge])
