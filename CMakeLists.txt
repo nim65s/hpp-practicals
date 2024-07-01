@@ -88,9 +88,9 @@ set(SRDF_UR_BENCHMARK_FILES
     srdf/ur_benchmark/box.srdf srdf/ur_benchmark/ground.srdf
     srdf/ur_benchmark/pokeball.srdf)
 
-set(URDF_PART_FILES urdf/part.urdf)
+set(URDF_PART_FILES urdf/part.urdf urdf/part_small.urdf)
 
-set(SRDF_PART_FILES srdf/part.srdf)
+set(SRDF_PART_FILES srdf/part.srdf srdf/part_small.srdf)
 
 
 # Install environment and robot model files

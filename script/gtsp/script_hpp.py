@@ -42,7 +42,7 @@ from robot import Robot
 from constraints import *
 from resolution import *
 from display import displayHandle, displayGripper
-#from gtsp import *
+from gtsp_laas import Algorithm, Gtsp, Tour, readGtspFromFile
 
 # PARSE ARGUMENTS
 defaultContext = "corbaserver"
@@ -140,20 +140,16 @@ graph.initialize()
 res, robot.q0, err = graph.generateTargetConfig('move_base', robot.q0, robot.q0)
 assert(res)
 # GRAPH VALIDATION
-print("Validating graph")
-ConsGraphValidation(ps, cgraph)
+# print("Validating graph")
+# ConsGraphValidation(ps, cgraph)
 
 
 ### PROBLEM RESOLUTION
 
 # INSTATEPLANNER
 basePlanner = BasePlanner(ps, graph, robot)
-armPlanner = ArmPlanner(ps, graph, robot, croadmap = basePlanner.croadmap)
-
-# LOAD (OR CREATE) MOBILE BASE ROADMAP
-basePlannerUsePrecomputedRoadmap = False
-if basePlannerUsePrecomputedRoadmap:
-    getMobileBaseRoadmap(basePlanner)
+armPlanner = ArmPlanner(ps, graph, robot, part_handles = part_handles,
+                        croadmap = basePlanner.croadmap)
 
 ### TAKE 8 ARBITRARY BASE POSES AROUND THE PART ###
 a = sqrt(2)/2
@@ -176,11 +172,73 @@ for bp in base_poses:
     home_configs.append(q1)
 
 ### BUILD ROADMAP WITH ALL PREGRASP AND GRASP CONFIGURATIONS
-basePlanner.buildRoadmap(home_configs)
-armPlanner.buildRoadmap(home_configs, part_handles)
+if True:
+    print("Reading roadmap from file")
+    readRoadmap(basePlanner, armPlanner, "./data/roadmap", part_handles, home_configs)
+else:
+    print("Building roadmap")
+    basePlanner.buildRoadmap(home_configs)
+    armPlanner.buildRoadmap(home_configs)
+    armPlanner.saveRoadmap("./data/roadmap")
+
+armPlanner.computeCostMatrix()
+armPlanner.writeGtspInFile("./data/tiago.txt")
+
+gtsp = Gtsp(len(armPlanner.nodes), len(armPlanner.clusters), armPlanner.clusters, armPlanner.cost)
+
+### CREATE THE GTSP PROBLEM
 
 ### CREATE A PLANNER TO USE THE ROADMAP
 cproblem = ps.client.basic.problem.createProblem(armPlanner.crobot)
 cplanner = ps.client.basic.problem.createPathPlanner('DiffusingPlanner', cproblem,
                                                      armPlanner.croadmap)
 cplanner.maxIterations(0)
+
+### SOLVE GTSP PROBLEM
+gtsp = readGtspFromFile("./data/tiago.txt")
+tour = Tour(gtsp)
+algorithm = Algorithm(gtsp)
+algorithm.LKHheur(tour)
+
+# Reorder node ids so that 0 is at the first place
+t = list(tour.nodes)
+while t[0] != 0:
+    # move first element to the end of the list
+    t = t[1:] + t[:1]
+
+configs = [armPlanner.nodes[i] for i in t]
+
+# Here we make the asumption that the first configuration is a home configuration,
+# the other configurations are pre-grasp configurations.
+p = None
+for q0, q1 in zip(configs, configs[1:]):
+    cproblem.setInitConfig(q0)
+    cproblem.resetGoalConfigs()
+    cproblem.addGoalConfig(q1)
+    if p:
+        p1 = cplanner.solve()
+        p.concatenate(p1)
+        p1.deleteThis()
+    else:
+        p = cplanner.solve()
+    q2 = armPlanner.pregraspToGrasp[tuple(q1)]
+    cproblem.setInitConfig(q1)
+    cproblem.resetGoalConfigs()
+    cproblem.addGoalConfig(q2)
+    p1 = cplanner.solve()
+    p.concatenate(p1);
+    p2 = p1.reverse()
+    p.concatenate(p2);
+    p1.deleteThis(); p2.deleteThis()
+
+# return to initial configuration
+q0 = q1[:]
+q1 = configs[0]
+cproblem.setInitConfig(q0)
+cproblem.resetGoalConfigs()
+cproblem.addGoalConfig(q1)
+p1 = cplanner.solve()
+p.concatenate(p1)
+p1.deleteThis()
+ps.client.basic.problem.addPath(p)
+p.deleteThis()
