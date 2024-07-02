@@ -38,9 +38,7 @@ python3Packages.buildPythonPackage {
     libsForQt5.wrapQtAppsHook
     pkg-config
   ];
-  buildInputs = [
-    libsForQt5.qtbase
-  ];
+  buildInputs = [ libsForQt5.qtbase ];
   propagatedBuildInputs = [
     hpp-gepetto-viewer
     hpp-gui

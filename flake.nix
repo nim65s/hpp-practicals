@@ -13,7 +13,7 @@
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
     hpp-gepetto-viewer = {
-      url = "github:humanoid-path-planner/hpp-gepetto-viewer/release/5.1.0";
+      url = "github:humanoid-path-planner/hpp-gepetto-viewer";
       inputs = {
         nixpkgs.follows = "nixpkgs";
         flake-parts.follows = "flake-parts";
@@ -21,14 +21,14 @@
       };
     };
     hpp-gui = {
-      url = "github:humanoid-path-planner/hpp-gui/release/5.1.0";
+      url = "github:humanoid-path-planner/hpp-gui";
       inputs = {
         nixpkgs.follows = "nixpkgs";
         flake-parts.follows = "flake-parts";
       };
     };
     hpp-plot = {
-      url = "github:humanoid-path-planner/hpp-plot/release/5.1.0";
+      url = "github:humanoid-path-planner/hpp-plot";
       inputs = {
         nixpkgs.follows = "nixpkgs";
         flake-parts.follows = "flake-parts";
