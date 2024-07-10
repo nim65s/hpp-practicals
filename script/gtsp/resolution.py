@@ -72,7 +72,7 @@ class ArmPlanner:
         self.planner.setParameter("SimpleTimeParameterization/order",
                                          Any(TC_long, 2))
         self.planner.setParameter("SimpleTimeParameterization/maxAcceleration",
-                                         Any(TC_float, 2.0))
+                                         Any(TC_float, 4.0))
         self.planner.maxIterations(600)
         self.planner.timeOut(10.)
         # Set collision margin between mobile base and the rest because the collision model is
@@ -309,8 +309,8 @@ class BasePlanner:
         # Set parameters
         self.planner.setParameter('RSTimeParameterization/LinearAcceleration', Any(TC_float,.5))
         self.planner.setParameter('RSTimeParameterization/LinearDeceleration', Any(TC_float,.4))
-        self.planner.setParameter('RSTimeParameterization/MaxAngularVelocity', Any(TC_float,.1))
-        self.planner.setParameter('RSTimeParameterization/MaxLinearVelocity', Any(TC_float,.1))
+        self.planner.setParameter('RSTimeParameterization/MaxAngularVelocity', Any(TC_float,.5))
+        self.planner.setParameter('RSTimeParameterization/MaxLinearVelocity', Any(TC_float,1.))
         self.planner.setParameter('RSTimeParameterization/MinLinearVelocity', Any(TC_float,.05))
         # Set edge before setting Reeds and Shepp steering method since method setEdge puts the
         # steering method of the edge in the inner problem

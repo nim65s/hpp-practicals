@@ -56,7 +56,6 @@ p.add_argument ('--n-random-handles', type=int, default=None,
 args = p.parse_args ()
 if args.context != defaultContext:
     createContext (args.context)
-isSimulation = args.context == "simulation"
 
 # DEFINE CLASSES FOR THE PARTS
 class Driller:
