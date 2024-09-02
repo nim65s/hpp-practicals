@@ -20,6 +20,7 @@
             inputsFrom = [ self'.packages.default ];
             packages = [
               (pkgs.python3.withPackages (p: [
+                p.hpp-gepetto-viewer
                 p.hpp-manipulation-corba
               ]))
             ];
