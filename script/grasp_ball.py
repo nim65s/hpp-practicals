@@ -1,5 +1,3 @@
-from hpp import Transform
-from hpp.corbaserver.manipulation import ConstraintGraph, Constraints
 from manipulation import (
     Ground,
     PathPlayer,  # noqa: F401
@@ -10,6 +8,9 @@ from manipulation import (
     robot,
     vf,
 )
+
+from hpp import Transform
+from hpp.corbaserver.manipulation import ConstraintGraph, Constraints
 
 vf.loadEnvironmentModel(Ground, "ground")
 vf.loadObjectModel(Pokeball, "pokeball")
