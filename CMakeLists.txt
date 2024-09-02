@@ -63,7 +63,7 @@ find_package(hpp-manipulation-corba REQUIRED)
 find_package(hpp-gepetto-viewer REQUIRED)
 find_package(hpp-plot REQUIRED)
 find_package(hpp-gui REQUIRED)
-if (USE_TIAGO)
+if(USE_TIAGO)
   find_package(tiago_description REQUIRED)
   find_package(tiago_data REQUIRED)
   find_package(pmb2_description REQUIRED)
@@ -92,7 +92,6 @@ set(URDF_PART_FILES urdf/part.urdf urdf/part_small.urdf)
 
 set(SRDF_PART_FILES srdf/part.srdf srdf/part_small.srdf)
 
-
 # Install environment and robot model files
 #
 install(
@@ -115,13 +114,11 @@ install(FILES ${SRDF_UR_FILES}
 install(DIRECTORY meshes
         DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME})
 
- if (USE_TIAGO)
-  install(FILES ${URDF_PART_FILES}
-          DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/urdf)
+install(FILES ${URDF_PART_FILES}
+        DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/urdf)
 
-  install(FILES ${SRDF_PART_FILES}
-          DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/srdf)
-endif()
+install(FILES ${SRDF_PART_FILES}
+        DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/srdf)
 
 # Install python client files
 #
