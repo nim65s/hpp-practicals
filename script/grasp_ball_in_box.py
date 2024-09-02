@@ -1,5 +1,3 @@
-from hpp.corbaserver import Client  # noqa: F401
-from hpp.corbaserver.manipulation import ConstraintGraph
 from manipulation import (
     Box,
     Ground,
@@ -9,6 +7,9 @@ from manipulation import (
     robot,
     vf,
 )
+
+from hpp.corbaserver import Client  # noqa: F401
+from hpp.corbaserver.manipulation import ConstraintGraph
 
 vf.loadEnvironmentModel(Ground, "ground")
 vf.loadEnvironmentModel(Box, "box")
