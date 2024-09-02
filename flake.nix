@@ -44,24 +44,22 @@
                 inputs.gtsp-laas.packages.${system}.gtsp-laas
               ]))
             ];
-            env.ROS_PACKAGE_PATH = pkgs.lib.concatStringsSep ":" (
-              map (p: "${p}/share") [
-                inputs.gerard-bauzil.packages.${system}.gerard-bauzil
-                self'.packages.default
-                self'.packages.pmb2-meshes
-                self'.packages.tiago-data
-                self'.packages.tiago-meshes
-                self'.packages.hey5-meshes
-              ]
-            );
-            shellHook = ''
-              export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${
-                pkgs.lib.makeLibraryPath [
-                  pkgs.hpp-manipulation
-                  pkgs.hpp-manipulation-corba
+            env = {
+              ROS_PACKAGE_PATH = pkgs.lib.concatStringsSep ":" (
+                map (p: "${p}/share") [
+                  inputs.gerard-bauzil.packages.${system}.gerard-bauzil
+                  self'.packages.default
+                  self'.packages.pmb2-meshes
+                  self'.packages.tiago-data
+                  self'.packages.tiago-meshes
+                  self'.packages.hey5-meshes
                 ]
-              }
-            '';
+              );
+              LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [
+                pkgs.hpp-manipulation
+                pkgs.hpp-manipulation-corba
+              ];
+            };
           };
           packages = {
             default = self'.packages.hpp-practicals;
