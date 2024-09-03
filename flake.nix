@@ -2,7 +2,7 @@
   description = "Practicals for Humanoid Path Planner software";
 
   inputs = {
-    nixpkgs.url = "github:nim65s/nixpkgs/pin-gv";
+    nixpkgs.url = "github:gepetto/nixpkgs/gv";
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
