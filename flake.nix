@@ -38,6 +38,7 @@
         {
           devShells.default = pkgs.mkShell {
             packages = [
+              pkgs.gepetto-viewer
               (pkgs.python3.withPackages (_: [
                 self'.packages.default
                 inputs.hpp-task-sequencing.packages.${system}.hpp-task-sequencing
