@@ -39,8 +39,9 @@
           devShells.default = pkgs.mkShell {
             packages = [
               pkgs.gepetto-viewer
-              (pkgs.python3.withPackages (_: [
+              (pkgs.python3.withPackages (p: [
                 self'.packages.default
+                p.hpp-manipulation-corba
                 inputs.hpp-task-sequencing.packages.${system}.hpp-task-sequencing
                 inputs.gtsp-laas.packages.${system}.gtsp-laas
               ]))
