@@ -20,90 +20,18 @@
         "type": "github"
       }
     },
-    "gerard-bauzil": {
-      "inputs": {
-        "flake-parts": [
-          "flake-parts"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1725296028,
-        "narHash": "sha256-cm8gsWKWPY6kUv6d3V19dICwMUU4qMTRKRQns2pGNf0=",
-        "owner": "gepetto",
-        "repo": "gerard-bauzil",
-        "rev": "0f17529d385c72edfddf8ab2c7271235e6ca786b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "gepetto",
-        "ref": "devel",
-        "repo": "gerard-bauzil",
-        "type": "github"
-      }
-    },
-    "gtsp-laas": {
-      "inputs": {
-        "flake-parts": [
-          "flake-parts"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1725293653,
-        "narHash": "sha256-iGOlC36EOJ4/6lTgWgSUFaC9a9CiMkTauzlbU6eWmnU=",
-        "ref": "nix",
-        "rev": "41b6545ac3aa96790c942e2db81885362138f9d0",
-        "revCount": 20,
-        "type": "git",
-        "url": "https://gitlab.laas.fr/gsaurel/gtsp-laas"
-      },
-      "original": {
-        "ref": "nix",
-        "type": "git",
-        "url": "https://gitlab.laas.fr/gsaurel/gtsp-laas"
-      }
-    },
-    "hpp-task-sequencing": {
-      "inputs": {
-        "flake-parts": [
-          "flake-parts"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1725293125,
-        "narHash": "sha256-4gyp6modUOg/JZfBmRs9YSPvWVrhgXRZW950iPr0e4A=",
-        "owner": "nim65s",
-        "repo": "hpp-task-sequencing",
-        "rev": "e7fc38ba0cb60d7b79439635285053dbe4dc7e8e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nim65s",
-        "ref": "nix",
-        "repo": "hpp-task-sequencing",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1725376166,
-        "narHash": "sha256-GEHeosJdMiag7ERgfaY9Z70boRNBrzHmxODSIO6igSY=",
-        "owner": "gepetto",
+        "lastModified": 1725032552,
+        "narHash": "sha256-Y8/k1Mg41LM12aUyT8aqcCorWigt9U1rd9liNnM/oHA=",
+        "owner": "nim65s",
         "repo": "nixpkgs",
-        "rev": "fdfd58198c3bf74271eb4a85de0fa7118ed1f2bc",
+        "rev": "8636c24af9524f3abc0199fffb8ca5824ee6bd1d",
         "type": "github"
       },
       "original": {
-        "owner": "gepetto",
-        "ref": "gv",
+        "owner": "nim65s",
+        "ref": "pin-gv",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -111,9 +39,6 @@
     "root": {
       "inputs": {
         "flake-parts": "flake-parts",
-        "gerard-bauzil": "gerard-bauzil",
-        "gtsp-laas": "gtsp-laas",
-        "hpp-task-sequencing": "hpp-task-sequencing",
         "nixpkgs": "nixpkgs"
       }
     }
