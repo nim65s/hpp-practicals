@@ -18,6 +18,8 @@ from pyhpp.manipulation import (
     urdf,
 )
 
+state_placement = None  # please linters
+
 urdf_ur5 = "package://example-robot-data/robots/ur_description/urdf/ur5_gripper.urdf"
 srdf_ur5 = "package://example-robot-data/robots/ur_description/srdf/ur5_gripper.srdf"
 
