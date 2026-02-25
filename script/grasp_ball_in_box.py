@@ -16,7 +16,7 @@ from pyhpp.manipulation import (
     ProgressiveProjector,
     urdf,
 )
-from pyhpp.viser import Viewer  # noqa
+from pyhpp_viser import Viewer  # noqa
 
 state_placement = None  # please linters
 

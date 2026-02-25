@@ -3,7 +3,7 @@ from motion_planner import MotionPlanner
 from pinocchio import SE3
 from pyhpp.core import Problem, Roadmap, WeighedDistance
 from pyhpp.pinocchio import Device, urdf
-from pyhpp.viser import Viewer  # noqa
+from pyhpp_viser import Viewer  # noqa
 
 # Robot configuration
 urdfFilename = "package://example-robot-data/robots/ur_description/urdf/ur5_joint_limited_robot.urdf"

@@ -16,7 +16,7 @@ from pyhpp.manipulation import (
     ProgressiveProjector,
     urdf,
 )
-from pyhpp.viser import Viewer  # noqa
+from pyhpp_viser import Viewer  # noqa
 
 urdf_ur5 = "package://example-robot-data/robots/ur_description/urdf/ur5_gripper.urdf"
 srdf_ur5 = "package://example-robot-data/robots/ur_description/srdf/ur5_gripper.srdf"
@@ -162,6 +162,7 @@ problem.addGoalConfig(q_goal)
 problem.constraintGraph(graph)
 
 planner = ManipulationPlanner(problem)
+# path = planner.solve()
 # v = Viewer (robot)
 # v.initViewer(open=True, loadModel=True)
 # v.loadPath(path)
