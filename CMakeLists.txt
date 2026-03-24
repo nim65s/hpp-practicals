@@ -51,7 +51,7 @@ project(${PROJECT_NAME} ${PROJECT_ARGS})
 
 findpython()
 
-if (USE_CORBA)
+if(USE_CORBA)
   find_package(hpp-manipulation-corba REQUIRED)
   find_package(hpp-gui REQUIRED)
 endif()
