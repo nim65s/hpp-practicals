@@ -18,6 +18,8 @@ set(PROJECT_DESCRIPTION "Practicals for Humanoid Path Planner software.")
 
 set(PROJECT_USE_CMAKE_EXPORT TRUE)
 
+option(USE_CORBA "Enable dependency to hpp-manipulation-corba" OFF)
+
 # Check if the submodule cmake have been initialized
 set(JRL_CMAKE_MODULES "${CMAKE_CURRENT_LIST_DIR}/cmake")
 if(EXISTS "${JRL_CMAKE_MODULES}/base.cmake")
@@ -49,10 +51,12 @@ project(${PROJECT_NAME} ${PROJECT_ARGS})
 
 findpython()
 
-find_package(hpp-manipulation-corba REQUIRED)
+if (USE_CORBA)
+  find_package(hpp-manipulation-corba REQUIRED)
+  find_package(hpp-gui REQUIRED)
+endif()
 find_package(hpp-gepetto-viewer REQUIRED)
 find_package(hpp-plot REQUIRED)
-find_package(hpp-gui REQUIRED)
 
 set(URDF_UR_BENCHMARK_FILES
     urdf/ur_benchmark/obstacles.urdf
@@ -92,24 +96,26 @@ install(DIRECTORY meshes
 
 # Install python client files
 #
-install(
-  FILES ${PROJECT_SOURCE_DIR}/src/hpp/corbaserver/practicals/ur5/robot.py
-        ${PROJECT_SOURCE_DIR}/src/hpp/corbaserver/practicals/ur5/__init__.py
-  DESTINATION ${PYTHON_SITELIB}/hpp/corbaserver/practicals/ur5)
+if(USE_CORBA)
+  install(
+    FILES ${PROJECT_SOURCE_DIR}/src/hpp/corbaserver/practicals/ur5/robot.py
+          ${PROJECT_SOURCE_DIR}/src/hpp/corbaserver/practicals/ur5/__init__.py
+    DESTINATION ${PYTHON_SITELIB}/hpp/corbaserver/practicals/ur5)
 
-install(FILES ${PROJECT_SOURCE_DIR}/src/hpp/corbaserver/practicals/__init__.py
-        DESTINATION ${PYTHON_SITELIB}/hpp/corbaserver/practicals)
+  install(FILES ${PROJECT_SOURCE_DIR}/src/hpp/corbaserver/practicals/__init__.py
+          DESTINATION ${PYTHON_SITELIB}/hpp/corbaserver/practicals)
 
-install(
-  FILES
-    ${PROJECT_SOURCE_DIR}/src/hpp/corbaserver/practicals/manipulation/__init__.py
-  DESTINATION ${PYTHON_SITELIB}/hpp/corbaserver/practicals/manipulation)
+  install(
+    FILES
+      ${PROJECT_SOURCE_DIR}/src/hpp/corbaserver/practicals/manipulation/__init__.py
+    DESTINATION ${PYTHON_SITELIB}/hpp/corbaserver/practicals/manipulation)
 
-install(
-  FILES
-    ${PROJECT_SOURCE_DIR}/src/hpp/corbaserver/practicals/manipulation/ur5/robot.py
-    ${PROJECT_SOURCE_DIR}/src/hpp/corbaserver/practicals/manipulation/ur5/__init__.py
-  DESTINATION ${PYTHON_SITELIB}/hpp/corbaserver/practicals/manipulation/ur5)
+  install(
+    FILES
+      ${PROJECT_SOURCE_DIR}/src/hpp/corbaserver/practicals/manipulation/ur5/robot.py
+      ${PROJECT_SOURCE_DIR}/src/hpp/corbaserver/practicals/manipulation/ur5/__init__.py
+    DESTINATION ${PYTHON_SITELIB}/hpp/corbaserver/practicals/manipulation/ur5)
+endif()
 
 add_library(${PROJECT_NAME} INTERFACE)
 install(
