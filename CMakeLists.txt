@@ -18,27 +18,37 @@ set(PROJECT_DESCRIPTION "Practicals for Humanoid Path Planner software.")
 
 set(PROJECT_USE_CMAKE_EXPORT TRUE)
 
+option(USE_CORBA "Enable dependency to hpp-manipulation-corba" OFF)
+
 # Check if the submodule cmake have been initialized
 set(JRL_CMAKE_MODULES "${CMAKE_CURRENT_LIST_DIR}/cmake")
 if(EXISTS "${JRL_CMAKE_MODULES}/base.cmake")
-  message(STATUS "JRL cmakemodules found in 'cmake/' git submodule")
+    message(STATUS "JRL cmakemodules found in 'cmake/' git submodule")
 else()
-  find_package(jrl-cmakemodules QUIET CONFIG)
-  if(jrl-cmakemodules_FOUND)
-    get_property(
-      JRL_CMAKE_MODULES
-      TARGET jrl-cmakemodules::jrl-cmakemodules
-      PROPERTY INTERFACE_INCLUDE_DIRECTORIES)
-    message(STATUS "JRL cmakemodules found on system at ${JRL_CMAKE_MODULES}")
-  else()
-    message(STATUS "JRL cmakemodules not found. Let's fetch it.")
-    include(FetchContent)
-    FetchContent_Declare(
-      "jrl-cmakemodules"
-      GIT_REPOSITORY "https://github.com/jrl-umi3218/jrl-cmakemodules.git")
-    FetchContent_MakeAvailable("jrl-cmakemodules")
-    FetchContent_GetProperties("jrl-cmakemodules" SOURCE_DIR JRL_CMAKE_MODULES)
-  endif()
+    find_package(jrl-cmakemodules QUIET CONFIG)
+    if(jrl-cmakemodules_FOUND)
+        get_property(
+            JRL_CMAKE_MODULES
+            TARGET jrl-cmakemodules::jrl-cmakemodules
+            PROPERTY INTERFACE_INCLUDE_DIRECTORIES
+        )
+        message(
+            STATUS
+            "JRL cmakemodules found on system at ${JRL_CMAKE_MODULES}"
+        )
+    else()
+        message(STATUS "JRL cmakemodules not found. Let's fetch it.")
+        include(FetchContent)
+        FetchContent_Declare(
+            "jrl-cmakemodules"
+            GIT_REPOSITORY "https://github.com/jrl-umi3218/jrl-cmakemodules.git"
+        )
+        FetchContent_MakeAvailable("jrl-cmakemodules")
+        FetchContent_GetProperties(
+            "jrl-cmakemodules"
+            SOURCE_DIR JRL_CMAKE_MODULES
+        )
+    endif()
 endif()
 
 include("${JRL_CMAKE_MODULES}/hpp.cmake")
@@ -49,10 +59,12 @@ project(${PROJECT_NAME} ${PROJECT_ARGS})
 
 findpython()
 
-find_package(hpp-manipulation-corba REQUIRED)
+if(USE_CORBA)
+    find_package(hpp-manipulation-corba REQUIRED)
+    find_package(hpp-gui REQUIRED)
+endif()
 find_package(hpp-gepetto-viewer REQUIRED)
 find_package(hpp-plot REQUIRED)
-find_package(hpp-gui REQUIRED)
 
 set(URDF_UR_BENCHMARK_FILES
     urdf/ur_benchmark/obstacles.urdf
@@ -61,58 +73,75 @@ set(URDF_UR_BENCHMARK_FILES
     urdf/ur_benchmark/box.urdf
     urdf/ur_benchmark/ground.urdf
     urdf/ur_benchmark/ground_with_obstacles.urdf
-    urdf/ur_benchmark/pokeball.urdf)
+    urdf/ur_benchmark/pokeball.urdf
+)
 
 set(URDF_UR_FILES urdf/ur5_gripper.urdf urdf/ur5_joint_limited_robot.urdf)
 
 set(SRDF_UR_FILES srdf/ur5_gripper.srdf srdf/ur5_joint_limited_robot.srdf)
 
 set(SRDF_UR_BENCHMARK_FILES
-    srdf/ur_benchmark/box.srdf srdf/ur_benchmark/ground.srdf
-    srdf/ur_benchmark/pokeball.srdf)
+    srdf/ur_benchmark/box.srdf
+    srdf/ur_benchmark/ground.srdf
+    srdf/ur_benchmark/pokeball.srdf
+)
 
 # Install environment and robot model files
 #
 install(
-  FILES ${URDF_UR_BENCHMARK_FILES}
-  DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/urdf/ur_benchmark)
+    FILES ${URDF_UR_BENCHMARK_FILES}
+    DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/urdf/ur_benchmark
+)
 
 install(
-  FILES ${SRDF_UR_BENCHMARK_FILES}
-  DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/srdf/ur_benchmark)
+    FILES ${SRDF_UR_BENCHMARK_FILES}
+    DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/srdf/ur_benchmark
+)
 
-install(FILES ${URDF_UR_FILES}
-        DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/urdf)
+install(
+    FILES ${URDF_UR_FILES}
+    DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/urdf
+)
 
-install(FILES ${SRDF_UR_FILES}
-        DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/srdf)
+install(
+    FILES ${SRDF_UR_FILES}
+    DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/srdf
+)
 
-install(DIRECTORY meshes
-        DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME})
+install(
+    DIRECTORY meshes
+    DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}
+)
 
 # Install python client files
 #
-install(
-  FILES ${PROJECT_SOURCE_DIR}/src/hpp/corbaserver/practicals/ur5/robot.py
-        ${PROJECT_SOURCE_DIR}/src/hpp/corbaserver/practicals/ur5/__init__.py
-  DESTINATION ${PYTHON_SITELIB}/hpp/corbaserver/practicals/ur5)
+if(USE_CORBA)
+    install(
+        FILES
+            ${PROJECT_SOURCE_DIR}/src/hpp/corbaserver/practicals/ur5/robot.py
+            ${PROJECT_SOURCE_DIR}/src/hpp/corbaserver/practicals/ur5/__init__.py
+        DESTINATION ${PYTHON_SITELIB}/hpp/corbaserver/practicals/ur5
+    )
 
-install(FILES ${PROJECT_SOURCE_DIR}/src/hpp/corbaserver/practicals/__init__.py
-        DESTINATION ${PYTHON_SITELIB}/hpp/corbaserver/practicals)
+    install(
+        FILES ${PROJECT_SOURCE_DIR}/src/hpp/corbaserver/practicals/__init__.py
+        DESTINATION ${PYTHON_SITELIB}/hpp/corbaserver/practicals
+    )
 
-install(
-  FILES
-    ${PROJECT_SOURCE_DIR}/src/hpp/corbaserver/practicals/manipulation/__init__.py
-  DESTINATION ${PYTHON_SITELIB}/hpp/corbaserver/practicals/manipulation)
+    install(
+        FILES
+            ${PROJECT_SOURCE_DIR}/src/hpp/corbaserver/practicals/manipulation/__init__.py
+        DESTINATION ${PYTHON_SITELIB}/hpp/corbaserver/practicals/manipulation
+    )
 
-install(
-  FILES
-    ${PROJECT_SOURCE_DIR}/src/hpp/corbaserver/practicals/manipulation/ur5/robot.py
-    ${PROJECT_SOURCE_DIR}/src/hpp/corbaserver/practicals/manipulation/ur5/__init__.py
-  DESTINATION ${PYTHON_SITELIB}/hpp/corbaserver/practicals/manipulation/ur5)
+    install(
+        FILES
+            ${PROJECT_SOURCE_DIR}/src/hpp/corbaserver/practicals/manipulation/ur5/robot.py
+            ${PROJECT_SOURCE_DIR}/src/hpp/corbaserver/practicals/manipulation/ur5/__init__.py
+        DESTINATION
+            ${PYTHON_SITELIB}/hpp/corbaserver/practicals/manipulation/ur5
+    )
+endif()
 
 add_library(${PROJECT_NAME} INTERFACE)
-install(
-  TARGETS ${PROJECT_NAME}
-  EXPORT ${TARGETS_EXPORT_NAME}
-  DESTINATION lib)
+install(TARGETS ${PROJECT_NAME} EXPORT ${TARGETS_EXPORT_NAME} DESTINATION lib)
