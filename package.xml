@@ -3,11 +3,12 @@
   <name>hpp_practicals</name>
   <version>8.0.0</version>
   <description>Practicals for HPP</description>
-  <exec_depend>hpp_gepetto_viewer</exec_depend>
-  <exec_depend>hpp_plot</exec_depend>
   <author>Florent Lamiraux</author>
   <maintainer email='guilhem.saurel@laas.fr'>Guilhem Saurel</maintainer>
   <license>LGPL v2</license>
+
+  <exec_depend>hpp_gepetto_viewer</exec_depend>
+  <exec_depend>hpp_plot</exec_depend>
 
   <buildtool_depend>cmake</buildtool_depend>
   <build_depend>jrl_cmakemodules</build_depend>
